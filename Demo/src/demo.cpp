@@ -1,6 +1,5 @@
 #include "library.h"
 
-int main()
-{
+int main() {
     HelloWorld();
 }
