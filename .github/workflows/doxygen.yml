@@ -1,0 +1,31 @@
+name: Deploy Doxygen Documentation
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Redirect HTML ↪
+        uses: 1arp/create-a-file-action@0.2
+        with:
+          path: 'docs'
+          file: 'index.html'
+          content: |
+            <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+            <html>
+            <head>
+              <meta http-equiv=Refresh content="0;url=html/index.html">
+            </head>
+            </html>
+
+      - name: Doxygen 🎈 
+        uses: mattnotmitt/doxygen-action@v1
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs # The folder the action should deploy.
+
